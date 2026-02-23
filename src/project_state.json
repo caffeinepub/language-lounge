@@ -1,0 +1,412 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "A global communication app with voice chat, video chat, text chat, and community building features. Includes multi-language support, live lobby with language filters and topic tags, interactive voice rooms with listener-to-speaker transitions, translation and learning tools, and user profiles with language levels and interests.",
+  "architectural_notes": [
+    "Real-time communication requires WebRTC or similar technology for voice/video chat",
+    "Multi-language support needs translation API integration (e.g., Google Translate, DeepL)",
+    "Live lobby requires real-time database synchronization for room status updates",
+    "AI transcription requires speech-to-text API integration",
+    "User authentication and profile management system needed",
+    "Moderation system required for report/block functionality",
+    "Profile system needs image upload and storage capability for user photos"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-live-lobby-discovery-page-with-language-filter-tabs-japanese-bengali-english-and-at-least-5-additional-languages-displayed-at-the-top-of-the-interface",
+      "title": "Create a Live Lobby discovery page with language filter tabs (Japanese, Bengali, English, and at least 5 additional languages) displayed at the top of the interface",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-topic-tags-for-all-rooms-with-predefined-categories-including-gaming-travel-skincare-and-at-least-10-additional-diverse-topics",
+      "title": "Implement topic tags for all rooms with predefined categories including #Gaming, #Travel, #Skincare, and at least 10 additional diverse topics",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-hot-indicator-algorithm-that-automatically-moves-rooms-with-the-most-active-speakers-to-the-top-of-the-live-lobby-list-refreshing-every-30-seconds",
+      "title": "Build a Hot Indicator algorithm that automatically moves rooms with the most active speakers to the top of the Live Lobby list, refreshing every 30 seconds",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-interactive-voice-room-interface-with-distinct-visual-sections-for-speakers-and-listeners-where-users-join-as-listeners-by-default",
+      "title": "Create an Interactive Voice Room interface with distinct visual sections for Speakers and Listeners, where users join as Listeners by default",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-raise-hand-functionality-where-listeners-can-request-to-become-speakers-with-a-host-approval-system-and-visual-notification-queue",
+      "title": "Implement Raise Hand functionality where Listeners can request to become Speakers, with a host approval system and visual notification queue",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-avatar-pulsing-visual-indicator-with-a-glowing-ring-animation-that-activates-around-the-avatar-of-whoever-is-currently-speaking-in-the-voice-room",
+      "title": "Add avatar pulsing visual indicator with a glowing ring animation that activates around the avatar of whoever is currently speaking in the voice room",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-in-room-text-chat-component-positioned-at-the-bottom-of-the-voice-room-interface-with-scrolling-message-history",
+      "title": "Build an in-room text chat component positioned at the bottom of the voice room interface with scrolling message history",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-instant-message-translation-feature-where-users-can-tap-any-word-in-the-chat-to-see-its-translation-in-their-selected-native-language",
+      "title": "Implement instant message translation feature where users can tap any word in the chat to see its translation in their selected native language",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-user-profile-system-with-language-level-indicators-showing-native-or-learner-status-with-specific-proficiency-levels-e-g-japanese-n5-spanish-b2",
+      "title": "Create user profile system with language level indicators showing Native or Learner status with specific proficiency levels (e.g., Japanese N5, Spanish B2)",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-interest-tags-to-user-profiles-with-predefined-options-including-resident-evil-photography-and-at-least-20-diverse-interests-used-for-room-suggestions",
+      "title": "Add interest tags to user profiles with predefined options including Resident Evil, Photography, and at least 20 diverse interests, used for room suggestions",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-2-tap-report-and-block-system-with-predefined-report-categories-and-immediate-blocking-effect",
+      "title": "Implement 2-tap Report and Block system with predefined report categories and immediate blocking effect",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-standard-text-chat-functionality-with-direct-messaging-between-users-and-group-chat-support",
+      "title": "Build standard text chat functionality with direct messaging between users and group chat support",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-community-building-features-including-user-created-public-and-private-rooms-with-customizable-settings",
+      "title": "Create community building features including user-created public and private rooms with customizable settings",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-a-cohesive-visual-theme-with-warm-welcoming-colors-earth-tones-soft-pastels-and-modern-rounded-interface-elements-that-promote-global-inclusivity-and-safe-communication",
+      "title": "Design a cohesive visual theme with warm, welcoming colors (earth tones, soft pastels) and modern, rounded interface elements that promote global inclusivity and safe communication",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-profile-picture-upload-functionality-to-the-user-profile-allowing-users-to-upload-and-display-a-custom-profile-image",
+      "title": "Add profile picture upload functionality to the user profile, allowing users to upload and display a custom profile image",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-self-introduction-text-field-to-user-profiles-where-users-can-write-about-themselves",
+      "title": "Add self-introduction text field to user profiles where users can write about themselves",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-likes-and-dislikes-fields-to-user-profiles-as-free-text-input-areas",
+      "title": "Add likes and dislikes fields to user profiles as free-text input areas",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-hobbies-field-to-user-profiles-as-a-free-text-input-area-separate-from-the-existing-interest-tags",
+      "title": "Add hobbies field to user profiles as a free-text input area separate from the existing interest tags",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-favorite-travel-destinations-field-to-user-profiles-where-users-can-list-places-they-want-to-visit",
+      "title": "Add favorite travel destinations field to user profiles where users can list places they want to visit",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-location-field-to-user-profiles-where-users-can-specify-where-they-live",
+      "title": "Add location field to user profiles where users can specify where they live",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-education-field-to-user-profiles-where-users-can-describe-what-they-study-or-their-educational-background",
+      "title": "Add education field to user profiles where users can describe what they study or their educational background",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-occupation-field-to-user-profiles-where-users-can-specify-their-job-or-profession",
+      "title": "Add occupation field to user profiles where users can specify their job or profession",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-age-field-to-user-profiles-as-a-numeric-input",
+      "title": "Add age field to user profiles as a numeric input",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-gender-field-to-user-profiles-as-a-dropdown-or-text-input",
+      "title": "Add gender field to user profiles as a dropdown or text input",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-relationship-status-field-to-user-profiles-as-a-dropdown-selection",
+      "title": "Add relationship status field to user profiles as a dropdown selection",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-userprofile-page-to-display-all-new-profile-fields-in-an-organized-layout-with-clear-section-headers",
+      "title": "Update the UserProfile page to display all new profile fields in an organized layout with clear section headers",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-profilesetup-page-to-include-form-inputs-for-all-new-profile-fields-with-appropriate-validation",
+      "title": "Update the ProfileSetup page to include form inputs for all new profile fields with appropriate validation",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-persistent-text-chat-interface-overlay-that-remains-visible-and-accessible-during-active-voice-calls-in-the-voiceroom-component",
+      "title": "Add a persistent text chat interface overlay that remains visible and accessible during active voice calls in the VoiceRoom component",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-inroomchat-component-remains-functional-and-accessible-when-users-are-actively-engaged-in-voice-communication-speaking-or-listening",
+      "title": "Ensure the InRoomChat component remains functional and accessible when users are actively engaged in voice communication (speaking or listening)",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-video-call-interface-component-with-integrated-text-chat-overlay-allowing-users-to-send-and-receive-text-messages-during-active-video-sessions",
+      "title": "Create a video call interface component with integrated text chat overlay, allowing users to send and receive text messages during active video sessions",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-voiceroom-page-to-include-a-chat-toggle-button-or-permanent-chat-panel-that-allows-users-to-view-and-interact-with-text-messages-while-participating-in-voice-conversations",
+      "title": "Update the VoiceRoom page to include a chat toggle button or permanent chat panel that allows users to view and interact with text messages while participating in voice conversations",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Voice chat functionality",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Video chat functionality",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Text chat functionality",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Community building features",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Multi-language support",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Live lobby with language filter tabs (Japanese, Bengali, English, etc.)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Topic tags for rooms (#Gaming, #Travel, #Skincare)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Hot indicator algorithm to prioritize active rooms",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Interactive voice room with listener-to-speaker transition (Raise Hand feature)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Avatar pulsing visual indicator for active speakers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "In-room text chat for typing unknown words",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Instant message translation (tap to translate words)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "AI transcriptions for live speech-to-text",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "User profiles with language levels (Native/Learner, e.g., Japanese N5)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "User interests tags for room suggestions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Report/Block tools (2-tap system)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Enhanced user profile with profile picture upload",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Profile fields: name, self-introduction, known languages, and languages to learn",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Profile fields: likes, dislikes, hobbies, and favorite travel destinations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Profile fields: location (where user lives), education, and occupation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Profile fields: age, gender, and relationship status",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Update the backend Profile type in main.mo to include all new profile fields with appropriate data types",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Enable text chat during active voice or video calls",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Global Connect",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

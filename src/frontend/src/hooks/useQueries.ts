@@ -1,0 +1,185 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useActor } from './useActor';
+import type { UserProfile, Message, RoomType } from '../backend';
+import { Principal } from '@dfinity/principal';
+import { toast } from 'sonner';
+
+export function useGetCallerUserProfile() {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  const query = useQuery<UserProfile | null>({
+    queryKey: ['currentUserProfile'],
+    queryFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.getCallerUserProfile();
+    },
+    enabled: !!actor && !actorFetching,
+    retry: false,
+  });
+
+  return {
+    ...query,
+    isLoading: actorFetching || query.isLoading,
+    isFetched: !!actor && query.isFetched,
+  };
+}
+
+export function useSaveCallerUserProfile() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (profile: UserProfile) => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.saveCallerUserProfile(profile);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUserProfile'] });
+      toast.success('Profile saved successfully');
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to save profile: ${error.message}`);
+    },
+  });
+}
+
+export function useGetUserProfile(userId: string) {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<UserProfile | null>({
+    queryKey: ['userProfile', userId],
+    queryFn: async () => {
+      if (!actor) return null;
+      try {
+        const principal = Principal.fromText(userId);
+        return await actor.getUserProfile(principal);
+      } catch {
+        return null;
+      }
+    },
+    enabled: !!actor && !actorFetching && !!userId,
+  });
+}
+
+export function useGetRoomMessages(roomId: number) {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<Message[]>({
+    queryKey: ['roomMessages', roomId],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getRoomMessages(BigInt(roomId));
+    },
+    enabled: !!actor && !actorFetching && roomId !== undefined,
+    refetchInterval: 3000,
+  });
+}
+
+export function useSendMessage() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ roomId, content }: { roomId: number; content: string }) => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.sendMessage(BigInt(roomId), content);
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['roomMessages', variables.roomId] });
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to send message: ${error.message}`);
+    },
+  });
+}
+
+export function useCreateRoom() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ name, roomType }: { name: string; roomType: RoomType }) => {
+      if (!actor) throw new Error('Actor not available');
+      const roomId = await actor.createRoom(name, roomType);
+      return Number(roomId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['rooms'] });
+      toast.success('Room created successfully');
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to create room: ${error.message}`);
+    },
+  });
+}
+
+export function useDeleteRoom() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (roomId: number) => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.deleteRoom(BigInt(roomId));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['rooms'] });
+      toast.success('Room deleted successfully');
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to delete room: ${error.message}`);
+    },
+  });
+}
+
+export function useBlockUser() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (targetUserId: string) => {
+      if (!actor) throw new Error('Actor not available');
+      const principal = Principal.fromText(targetUserId);
+      await actor.blockUser(principal);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blockedUsers'] });
+      toast.success('User blocked successfully');
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to block user: ${error.message}`);
+    },
+  });
+}
+
+export function useIsBlocked(targetUserId: string) {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<boolean>({
+    queryKey: ['isBlocked', targetUserId],
+    queryFn: async () => {
+      if (!actor) return false;
+      try {
+        const principal = Principal.fromText(targetUserId);
+        return await actor.isBlocked(principal);
+      } catch {
+        return false;
+      }
+    },
+    enabled: !!actor && !actorFetching && !!targetUserId,
+  });
+}
+
+export function useTranslateText() {
+  const { actor } = useActor();
+
+  return useMutation({
+    mutationFn: async ({ text, sourceLang, targetLang }: { text: string; sourceLang: string; targetLang: string }) => {
+      if (!actor) throw new Error('Actor not available');
+      return await actor.translateText(text, sourceLang, targetLang);
+    },
+    onError: (error: Error) => {
+      toast.error(`Translation failed: ${error.message}`);
+    },
+  });
+}
