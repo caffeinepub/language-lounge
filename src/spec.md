@@ -1,10 +1,9 @@
 # Specification
 
 ## Summary
-**Goal:** Add the Global ZGEY app logo to the header and as a favicon.
+**Goal:** Remove the fake tip element from the page.
 
 **Planned changes:**
-- Display the Global ZGEY logo in the Layout header component
-- Add the Global ZGEY favicon to the HTML document head for browser tab display
+- Remove or hide the tip/notification element at XPath `/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/span[1]`
 
-**User-visible outcome:** Users will see the Global ZGEY branding logo in the application header and as a favicon in their browser tab.
+**User-visible outcome:** The fake tip content will no longer appear on the page, providing a cleaner interface without unwanted notifications.

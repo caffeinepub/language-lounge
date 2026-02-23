@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-display-the-global-zgey-app-logo-in-the-layout-header-component-replacing-or-complementing-the-existing-global-connect-text-branding",
-      "featureTitle": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing \"Global Connect\" text branding",
+      "featureId": "feature-remove-or-hide-the-tip-notification-element-located-at-xpath-html-1-body-1-div-1-div-1-main-1-div-1-div-2-div-4-div-1-div-1-div-1-span-1-that-displays-fake-or-unwanted-content",
+      "featureTitle": "Remove or hide the tip/notification element located at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/span[1] that displays fake or unwanted content",
       "files": [
-        "frontend/src/components/Layout.tsx"
+        "frontend/src/pages/LiveLobby.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -18,28 +18,7 @@
         "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-45"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-the-global-zgey-logo-to-the-html-document-head-as-a-favicon-for-browser-tab-display",
-      "featureTitle": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
-      "files": [
-        "frontend/index.html"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "http-outcalls@3.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
-      ],
-      "testIds": [
-        "REQ-46"
+        "REQ-57"
       ],
       "confidence": "high"
     }

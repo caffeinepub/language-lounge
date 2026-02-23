@@ -86,18 +86,24 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     blockUser(target: Principal): Promise<void>;
     createRoom(name: string, roomType: RoomType): Promise<bigint>;
+    createStrangerRoom(): Promise<bigint>;
     deleteRoom(roomId: bigint): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getGiftCatalog(): Promise<Array<Gift>>;
     getRoomGiftHistory(roomId: bigint): Promise<Array<GiftTransaction>>;
     getRoomMessages(roomId: bigint): Promise<Array<Message>>;
+    getStrangerRoomMessages(roomId: bigint): Promise<Array<Message>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isBlocked(target: Principal): Promise<boolean>;
     isCallerAdmin(): Promise<boolean>;
+    joinStrangerQueue(): Promise<void>;
+    pairWithStranger(): Promise<bigint>;
+    removeFromStrangerQueue(): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     sendGift(roomId: bigint, recipient: Principal, giftId: bigint): Promise<void>;
     sendMessage(roomId: bigint, content: string): Promise<void>;
+    sendStrangerRoomMessage(roomId: bigint, content: string): Promise<void>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
     translateText(text: string, sourceLang: string, targetLang: string): Promise<string>;
 }

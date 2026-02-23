@@ -4,7 +4,8 @@ import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useGetCallerUserProfile } from '../hooks/useQueries';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Users } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Plus, Mic } from 'lucide-react';
 import LanguageFilterTabs from '../components/LanguageFilterTabs';
 import TopicFilterBar from '../components/TopicFilterBar';
 import RoomCard from '../components/RoomCard';
@@ -23,24 +24,22 @@ interface MockRoom {
   isHot: boolean;
 }
 
-const MOCK_ROOMS: MockRoom[] = [
-  { id: 1, name: 'Gaming Lounge', language: 'English', topics: ['Gaming', 'Technology'], activeSpeakers: 8, totalParticipants: 15, isHot: true },
-  { id: 2, name: 'Travel Stories', language: 'Spanish', topics: ['Travel', 'Photography'], activeSpeakers: 5, totalParticipants: 12, isHot: false },
-  { id: 3, name: 'Japanese Practice', language: 'Japanese', topics: ['Language Learning', 'Anime'], activeSpeakers: 12, totalParticipants: 20, isHot: true },
-  { id: 4, name: 'Skincare Tips', language: 'English', topics: ['Skincare', 'Fashion'], activeSpeakers: 3, totalParticipants: 8, isHot: false },
-  { id: 5, name: 'Cooking Together', language: 'French', topics: ['Cooking', 'Food'], activeSpeakers: 6, totalParticipants: 10, isHot: false },
-  { id: 6, name: 'K-Pop Fans', language: 'Korean', topics: ['Music', 'Entertainment'], activeSpeakers: 15, totalParticipants: 25, isHot: true },
-  { id: 7, name: 'Tech Talk', language: 'English', topics: ['Technology', 'Programming'], activeSpeakers: 7, totalParticipants: 14, isHot: false },
-  { id: 8, name: 'Bengali Culture', language: 'Bengali', topics: ['Culture', 'Art'], activeSpeakers: 4, totalParticipants: 9, isHot: false },
+const MOCK_VOICE_ROOMS: MockRoom[] = [
+  { id: 101, name: 'Voice Practice English', language: 'English', topics: ['Language Learning'], activeSpeakers: 6, totalParticipants: 12, isHot: false },
+  { id: 102, name: 'Japanese Conversation', language: 'Japanese', topics: ['Language Learning', 'Culture'], activeSpeakers: 10, totalParticipants: 18, isHot: true },
+  { id: 103, name: 'Spanish Speaking Club', language: 'Spanish', topics: ['Language Learning'], activeSpeakers: 4, totalParticipants: 9, isHot: false },
+  { id: 104, name: 'Tech Discussion Voice', language: 'English', topics: ['Technology', 'Programming'], activeSpeakers: 8, totalParticipants: 14, isHot: true },
+  { id: 105, name: 'Music Talk', language: 'Korean', topics: ['Music', 'Entertainment'], activeSpeakers: 5, totalParticipants: 11, isHot: false },
+  { id: 106, name: 'French Pronunciation', language: 'French', topics: ['Language Learning'], activeSpeakers: 3, totalParticipants: 7, isHot: false },
 ];
 
-export default function LiveLobby() {
+export default function VoiceChatLobby() {
   const { identity } = useInternetIdentity();
   const { data: userProfile } = useGetCallerUserProfile();
   const navigate = useNavigate();
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [rooms, setRooms] = useState(MOCK_ROOMS);
+  const [rooms, setRooms] = useState(MOCK_VOICE_ROOMS);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const isAuthenticated = !!identity;
@@ -54,7 +53,7 @@ export default function LiveLobby() {
         }));
         return updated.sort((a, b) => b.activeSpeakers - a.activeSpeakers).map((room, idx) => ({
           ...room,
-          isHot: idx < 3 && room.activeSpeakers > 7,
+          isHot: idx < 2 && room.activeSpeakers > 7,
         }));
       });
     }, 30000);
@@ -70,18 +69,19 @@ export default function LiveLobby() {
 
   return (
     <div className="space-y-8">
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-terracotta/20 via-sage/20 to-peach/20 p-8 md:p-12">
-        <img
-          src="/assets/generated/hero-banner.dim_1200x600.png"
-          alt="Global Connect"
-          className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
-        />
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-sage/20 via-terracotta/20 to-coral/20 p-8 md:p-12">
+        <div className="absolute inset-0 bg-gradient-to-br from-sage/10 to-transparent"></div>
         <div className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-terracotta via-coral to-peach bg-clip-text text-transparent">
-            Welcome to Global Connect
-          </h1>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-3 rounded-2xl bg-sage/20 backdrop-blur">
+              <Mic className="h-8 w-8 text-sage" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-sage via-terracotta to-coral bg-clip-text text-transparent">
+              Voice Chat Rooms
+            </h1>
+          </div>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Connect with people worldwide through voice, video, and text. Practice languages, share interests, and build meaningful connections.
+            Join voice-only conversations to practice languages, discuss topics, and connect with others through audio.
           </p>
         </div>
       </div>
@@ -91,13 +91,13 @@ export default function LiveLobby() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold">Live Rooms</h2>
-            <p className="text-sm text-muted-foreground">Discover active conversations happening now</p>
+            <h2 className="text-2xl font-bold">Active Voice Rooms</h2>
+            <p className="text-sm text-muted-foreground">Voice-only conversations happening now</p>
           </div>
           {isAuthenticated && (
-            <Button onClick={() => setIsCreateModalOpen(true)} className="bg-gradient-to-r from-terracotta to-coral hover:from-terracotta/90 hover:to-coral/90 text-white rounded-full">
+            <Button onClick={() => setIsCreateModalOpen(true)} className="bg-gradient-to-r from-sage to-terracotta hover:from-sage/90 hover:to-terracotta/90 text-white rounded-full">
               <Plus className="h-4 w-4 mr-2" />
-              Create Room
+              Create Voice Room
             </Button>
           )}
         </div>
@@ -108,16 +108,22 @@ export default function LiveLobby() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedRooms.map((room) => (
-            <RoomCard key={room.id} room={room} onClick={() => navigate({ to: `/room/${room.id}` })} />
+            <div key={room.id} className="relative">
+              <Badge className="absolute -top-2 -right-2 z-10 bg-sage text-white border-0">
+                <Mic className="h-3 w-3 mr-1" />
+                Voice
+              </Badge>
+              <RoomCard room={room} onClick={() => navigate({ to: `/room/${room.id}` })} />
+            </div>
           ))}
         </div>
 
         {sortedRooms.length === 0 && (
           <Card className="border-dashed">
             <CardContent className="flex flex-col items-center justify-center py-16">
-              <Users className="h-16 w-16 text-muted-foreground/50 mb-4" />
-              <p className="text-lg font-medium text-muted-foreground mb-2">No rooms found</p>
-              <p className="text-sm text-muted-foreground">Try adjusting your filters or create a new room</p>
+              <Mic className="h-16 w-16 text-muted-foreground/50 mb-4" />
+              <p className="text-lg font-medium text-muted-foreground mb-2">No voice rooms found</p>
+              <p className="text-sm text-muted-foreground">Try adjusting your filters or create a new voice room</p>
             </CardContent>
           </Card>
         )}

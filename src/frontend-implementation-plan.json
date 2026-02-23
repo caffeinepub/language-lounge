@@ -1,38 +1,21 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add app logo to Global ZGEY application",
+  "title": "Remove fake tip element from page",
   "requirements": [
     {
-      "id": "REQ-45",
-      "summary": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing branding",
+      "id": "REQ-57",
+      "summary": "Remove or hide the unwanted tip/notification element that displays fake content",
       "acceptanceCriteria": [
-        "The app logo image is visible in the Layout header",
-        "Logo maintains proper aspect ratio and sizing for header display",
-        "Logo is loaded from the generated assets directory as a static asset",
-        "Logo displays correctly on both light and dark themes"
+        "The tip element identified by the XPath is no longer visible on the page",
+        "No fake content displays in that location",
+        "The removal does not break the layout or functionality of surrounding elements"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/Layout.tsx",
+          "path": "frontend/src/pages/LiveLobby.tsx",
           "operation": "modify",
-          "description": "Import and display the Global ZGEY app logo (frontend/public/assets/generated/global-zgey-logo.dim_512x512.png) in the header component. Replace or complement the existing 'Global Connect' text branding with the logo image. Ensure the logo has appropriate sizing (height and width constraints) and maintains aspect ratio. Apply CSS classes that ensure the logo displays correctly in both light and dark themes. Position the logo in the header's branding area, typically on the left side before the navigation links."
-        }
-      ]
-    },
-    {
-      "id": "REQ-46",
-      "summary": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
-      "acceptanceCriteria": [
-        "Favicon appears in browser tabs when the application is open",
-        "Favicon uses appropriate size (16x16 or 32x32 pixels)",
-        "Favicon is linked correctly in frontend/index.html"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Add a <link> element in the <head> section to reference the Global ZGEY favicon (frontend/public/assets/generated/global-zgey-favicon.dim_32x32.png) as the page favicon. Use rel='icon' with type='image/png' and the correct href path to the generated favicon asset. Ensure the href path is relative to the frontend public directory (e.g., '/assets/generated/global-zgey-favicon.dim_32x32.png')."
+          "description": "Locate and remove or hide the tip/notification span element at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/span[1]. This element is within the main lobby content area, likely in the room grid section. Add conditional rendering or remove the element entirely to prevent display of fake or unwanted content. Ensure the removal does not affect surrounding room cards or grid layout."
         }
       ]
     }

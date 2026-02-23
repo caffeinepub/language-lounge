@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 13,
+  "projectStateVersion": 19,
   "summary": "A global communication app with voice chat, video chat, text chat, and community building features. Includes multi-language support, live lobby with language filters and topic tags, interactive voice rooms with listener-to-speaker transitions, translation and learning tools, and user profiles with language levels and interests.",
   "architectural_notes": [
     "Real-time communication requires WebRTC or similar technology for voice/video chat",
@@ -9,11 +9,11 @@
     "AI transcription requires speech-to-text API integration",
     "User authentication and profile management system needed",
     "Moderation system required for report/block functionality",
-    "Profile system needs image upload and storage capability for user photos"
+    "Profile system needs image upload and storage capability for user photos",
+    "Stranger matching system needs a queue and matching algorithm for pairing users"
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Global ZGEY app logo with globe illustration, soundwave element, and connected user avatars on dark background matching the uploaded reference design (global-zgey-logo.dim_512x512.png)\n- Global ZGEY favicon with simplified icon version suitable for browser tab display (global-zgey-favicon.dim_32x32.png)",
   "existing_features": [
     {
       "id": "feature-create-a-live-lobby-discovery-page-with-language-filter-tabs-japanese-bengali-english-and-at-least-5-additional-languages-displayed-at-the-top-of-the-interface",
@@ -334,6 +334,86 @@
         "REQ-46"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-create-a-new-strangervideocall-page-component-that-allows-users-to-start-video-calls-with-random-strangers",
+      "title": "Create a new StrangerVideoCall page component that allows users to start video calls with random strangers",
+      "reqIds": [
+        "REQ-47"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-videocallinterface-component-into-the-stranger-video-call-flow-with-automatic-connection-when-matched",
+      "title": "Integrate VideoCallInterface component into the stranger video call flow with automatic connection when matched",
+      "reqIds": [
+        "REQ-49"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-stranger-video-navigation-link-in-the-layout-header-to-access-the-stranger-video-calling-feature",
+      "title": "Add a \"Stranger Video\" navigation link in the Layout header to access the stranger video calling feature",
+      "reqIds": [
+        "REQ-50"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-waiting-room-ui-that-displays-while-searching-for-a-stranger-match-showing-loading-state-and-estimated-wait-time",
+      "title": "Implement a waiting room UI that displays while searching for a stranger match, showing loading state and estimated wait time",
+      "reqIds": [
+        "REQ-51"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-voice-chat-navigation-link-in-the-layout-header-component-that-provides-dedicated-access-to-voice-chat-rooms",
+      "title": "Add a 'Voice Chat' navigation link in the Layout header component that provides dedicated access to voice chat rooms",
+      "reqIds": [
+        "REQ-52"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-video-chat-navigation-link-in-the-layout-header-component-that-provides-dedicated-access-to-video-chat-rooms",
+      "title": "Add a 'Video Chat' navigation link in the Layout header component that provides dedicated access to video chat rooms",
+      "reqIds": [
+        "REQ-53"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-dedicated-voicechatlobby-page-component-that-displays-available-voice-only-chat-rooms-with-filtering-and-room-creation-options",
+      "title": "Create a dedicated VoiceChatLobby page component that displays available voice-only chat rooms with filtering and room creation options",
+      "reqIds": [
+        "REQ-54"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-dedicated-videochatlobby-page-component-that-displays-available-video-chat-rooms-with-filtering-and-room-creation-options",
+      "title": "Create a dedicated VideoChatLobby page component that displays available video chat rooms with filtering and room creation options",
+      "reqIds": [
+        "REQ-55"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-route-definitions-in-app-tsx-for-the-voice-chat-lobby-page-route-path-voice-chat-and-video-chat-lobby-page-route-path-video-chat",
+      "title": "Add route definitions in App.tsx for the voice chat lobby page (route path: /voice-chat) and video chat lobby page (route path: /video-chat)",
+      "reqIds": [
+        "REQ-56"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-or-hide-the-tip-notification-element-located-at-xpath-html-1-body-1-div-1-div-1-main-1-div-1-div-2-div-4-div-1-div-1-div-1-span-1-that-displays-fake-or-unwanted-content",
+      "title": "Remove or hide the tip/notification element located at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/span[1] that displays fake or unwanted content",
+      "reqIds": [
+        "REQ-57"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -526,6 +606,32 @@
     {
       "id": "AR-43",
       "summary": "Add app logo to the application",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-44",
+      "summary": "Add dedicated live video calling with stranger matching and room creation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-46",
+      "summary": "Add backend support for stranger video room matching including room creation, participant pairing, and active session management",
+      "reqIds": [
+        "REQ-48"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-47",
+      "summary": "Add dedicated voice chat section in the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-48",
+      "summary": "Add dedicated video chat section in the app",
       "reqIds": [],
       "status": "pending"
     }

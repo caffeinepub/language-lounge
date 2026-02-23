@@ -229,3 +229,82 @@ export function useGetRoomGiftHistory(roomId: number) {
     refetchInterval: 3000,
   });
 }
+
+// Stranger video calling hooks
+export function useJoinStrangerQueue() {
+  const { actor } = useActor();
+
+  return useMutation({
+    mutationFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.joinStrangerQueue();
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to join queue: ${error.message}`);
+    },
+  });
+}
+
+export function usePairWithStranger() {
+  const { actor } = useActor();
+
+  return useMutation({
+    mutationFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      const roomId = await actor.pairWithStranger();
+      return Number(roomId);
+    },
+    onError: (error: Error) => {
+      // Don't show error toast for "no available strangers" as this is expected during polling
+      if (!error.message?.includes('No available strangers')) {
+        toast.error(`Failed to pair with stranger: ${error.message}`);
+      }
+    },
+  });
+}
+
+export function useRemoveFromStrangerQueue() {
+  const { actor } = useActor();
+
+  return useMutation({
+    mutationFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.removeFromStrangerQueue();
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to leave queue: ${error.message}`);
+    },
+  });
+}
+
+export function useGetStrangerRoomMessages(roomId: number) {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<Message[]>({
+    queryKey: ['strangerRoomMessages', roomId],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getStrangerRoomMessages(BigInt(roomId));
+    },
+    enabled: !!actor && !actorFetching && roomId !== undefined && roomId > 0,
+    refetchInterval: 3000,
+  });
+}
+
+export function useSendStrangerRoomMessage() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ roomId, content }: { roomId: number; content: string }) => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.sendStrangerRoomMessage(BigInt(roomId), content);
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['strangerRoomMessages', variables.roomId] });
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to send message: ${error.message}`);
+    },
+  });
+}

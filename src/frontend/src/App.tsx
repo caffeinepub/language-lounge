@@ -8,6 +8,9 @@ import MessagesPage from './pages/MessagesPage';
 import ChatConversation from './pages/ChatConversation';
 import UserProfile from './pages/UserProfile';
 import ProfileSetup from './pages/ProfileSetup';
+import StrangerVideoCall from './pages/StrangerVideoCall';
+import VoiceChatLobby from './pages/VoiceChatLobby';
+import VideoChatLobby from './pages/VideoChatLobby';
 import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from 'next-themes';
 
@@ -59,6 +62,24 @@ const profileSetupRoute = createRoute({
   component: ProfileSetup,
 });
 
+const strangerVideoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/stranger-video',
+  component: StrangerVideoCall,
+});
+
+const voiceChatRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/voice-chat',
+  component: VoiceChatLobby,
+});
+
+const videoChatRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/video-chat',
+  component: VideoChatLobby,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   voiceRoomRoute,
@@ -66,6 +87,9 @@ const routeTree = rootRoute.addChildren([
   chatConversationRoute,
   userProfileRoute,
   profileSetupRoute,
+  strangerVideoRoute,
+  voiceChatRoute,
+  videoChatRoute,
 ]);
 
 const router = createRouter({ routeTree });

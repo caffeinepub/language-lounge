@@ -179,18 +179,24 @@ export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     blockUser(target: Principal): Promise<void>;
     createRoom(name: string, roomType: RoomType): Promise<bigint>;
+    createStrangerRoom(): Promise<bigint>;
     deleteRoom(roomId: bigint): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getGiftCatalog(): Promise<Array<Gift>>;
     getRoomGiftHistory(roomId: bigint): Promise<Array<GiftTransaction>>;
     getRoomMessages(roomId: bigint): Promise<Array<Message>>;
+    getStrangerRoomMessages(roomId: bigint): Promise<Array<Message>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isBlocked(target: Principal): Promise<boolean>;
     isCallerAdmin(): Promise<boolean>;
+    joinStrangerQueue(): Promise<void>;
+    pairWithStranger(): Promise<bigint>;
+    removeFromStrangerQueue(): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     sendGift(roomId: bigint, recipient: Principal, giftId: bigint): Promise<void>;
     sendMessage(roomId: bigint, content: string): Promise<void>;
+    sendStrangerRoomMessage(roomId: bigint, content: string): Promise<void>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
     translateText(text: string, sourceLang: string, targetLang: string): Promise<string>;
 }
@@ -337,6 +343,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async createStrangerRoom(): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.createStrangerRoom();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.createStrangerRoom();
+            return result;
+        }
+    }
     async deleteRoom(arg0: bigint): Promise<void> {
         if (this.processError) {
             try {
@@ -421,6 +441,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getStrangerRoomMessages(arg0: bigint): Promise<Array<Message>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getStrangerRoomMessages(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getStrangerRoomMessages(arg0);
+            return result;
+        }
+    }
     async getUserProfile(arg0: Principal): Promise<UserProfile | null> {
         if (this.processError) {
             try {
@@ -463,6 +497,48 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async joinStrangerQueue(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.joinStrangerQueue();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.joinStrangerQueue();
+            return result;
+        }
+    }
+    async pairWithStranger(): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.pairWithStranger();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.pairWithStranger();
+            return result;
+        }
+    }
+    async removeFromStrangerQueue(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.removeFromStrangerQueue();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.removeFromStrangerQueue();
+            return result;
+        }
+    }
     async saveCallerUserProfile(arg0: UserProfile): Promise<void> {
         if (this.processError) {
             try {
@@ -502,6 +578,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.sendMessage(arg0, arg1);
+            return result;
+        }
+    }
+    async sendStrangerRoomMessage(arg0: bigint, arg1: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.sendStrangerRoomMessage(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.sendStrangerRoomMessage(arg0, arg1);
             return result;
         }
     }

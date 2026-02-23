@@ -3,7 +3,7 @@ import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useGetCallerUserProfile } from '../hooks/useQueries';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { MessageSquare, Users, User, LogOut, LogIn, Heart } from 'lucide-react';
+import { MessageSquare, Users, User, LogOut, LogIn, Heart, Video, Mic, Camera } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
@@ -67,6 +67,30 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 >
                   <Users className="h-4 w-4" />
                   Live Lobby
+                </Link>
+                <Link
+                  to="/voice-chat"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  activeProps={{ className: 'text-terracotta' }}
+                >
+                  <Mic className="h-4 w-4" />
+                  Voice Chat
+                </Link>
+                <Link
+                  to="/video-chat"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  activeProps={{ className: 'text-terracotta' }}
+                >
+                  <Camera className="h-4 w-4" />
+                  Video Chat
+                </Link>
+                <Link
+                  to="/stranger-video"
+                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  activeProps={{ className: 'text-terracotta' }}
+                >
+                  <Video className="h-4 w-4" />
+                  Stranger Video
                 </Link>
                 <Link
                   to="/messages"

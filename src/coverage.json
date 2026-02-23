@@ -1,35 +1,24 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-23T17:35:57.492Z",
+  "generatedAt": "2026-02-23T19:22:24.983Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-45",
-        "summary": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing \"Global Connect\" text branding",
+        "id": "REQ-57",
+        "summary": "Remove or hide the tip/notification element located at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/span[1] that displays fake or unwanted content",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/Layout.tsx"
+          "frontend/src/pages/LiveLobby.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/Layout.tsx"
-        ]
-      },
-      {
-        "id": "REQ-46",
-        "summary": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/index.html"
-        ],
-        "matchedFiles": [
-          "frontend/index.html"
+          "frontend/src/pages/LiveLobby.tsx"
         ]
       }
     ]
@@ -39,10 +28,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/index.html",
-    "frontend/public/assets/generated/global-zgey-favicon.dim_32x32.png",
-    "frontend/public/assets/generated/global-zgey-logo.dim_512x512.png",
-    "frontend/src/components/Layout.tsx",
+    "frontend/src/pages/LiveLobby.tsx",
+    "frontend/src/pages/VideoChatLobby.tsx",
+    "frontend/src/pages/VoiceChatLobby.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,62 +1,38 @@
 {
   "kind": "build_request",
-  "title": "Add app logo to Global ZGEY application",
+  "title": "Remove fake tip element from page",
   "projectName": "Global ZGEY",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-45",
-      "text": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing \"Global Connect\" text branding",
+      "id": "REQ-57",
+      "text": "Remove or hide the tip/notification element located at XPath /html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/span[1] that displays fake or unwanted content",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-latest"
+          "msg-final"
         ],
         "quotes": [
-          "add app logo"
+          "Don't need this tip of  fake things"
         ]
       },
       "acceptanceCriteria": [
-        "The app logo image is visible in the Layout header",
-        "Logo maintains proper aspect ratio and sizing for header display",
-        "Logo is loaded from the generated assets directory as a static asset",
-        "Logo displays correctly on both light and dark themes"
-      ]
-    },
-    {
-      "id": "REQ-46",
-      "text": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-latest"
-        ],
-        "quotes": [
-          "add app logo"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Favicon appears in browser tabs when the application is open",
-        "Favicon uses appropriate size (16x16 or 32x32 pixels)",
-        "Favicon is linked correctly in frontend/index.html"
+        "The tip element identified by the XPath is no longer visible on the page",
+        "No fake content displays in that location",
+        "The removal does not break the layout or functionality of surrounding elements"
       ]
     }
   ],
   "constraints": [
-    "Do not modify immutable frontend paths: useInternetIdentity, useActor, main.tsx, or components/ui directory",
-    "Logo image must be loaded from frontend/public/assets/generated directory as a static asset",
-    "Do not route generated logo through the backend"
+    "Only modify the specific element identified by the XPath expression",
+    "Do not alter the Layout header navigation or other core UI components"
   ],
   "nonGoals": [
-    "Animated logo variations",
-    "Multiple logo sizes for different breakpoints",
-    "Logo customization or theme-specific logo variants beyond basic display"
+    "Redesigning the entire page layout",
+    "Removing other notification or tip elements not specified by the user"
   ],
   "imageRequirements": {
-    "required": [
-      "Global ZGEY app logo with globe illustration, soundwave element, and connected user avatars on dark background matching the uploaded reference design (global-zgey-logo.dim_512x512.png)",
-      "Global ZGEY favicon with simplified icon version suitable for browser tab display (global-zgey-favicon.dim_32x32.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }
