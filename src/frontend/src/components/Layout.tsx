@@ -49,9 +49,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-3 group">
-              <img src="/assets/generated/global-connect-icon.dim_256x256.png" alt="Global Connect" className="h-10 w-10 rounded-xl group-hover:scale-105 transition-transform" />
+              <img 
+                src="/assets/generated/global-zgey-logo.dim_512x512.png" 
+                alt="Global ZGEY" 
+                className="h-10 w-10 object-contain group-hover:scale-105 transition-transform" 
+              />
               <span className="text-xl font-bold bg-gradient-to-r from-terracotta via-coral to-peach bg-clip-text text-transparent">
-                Global Connect
+                Global ZGEY
               </span>
             </Link>
             {isAuthenticated && (
@@ -131,14 +135,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>© {new Date().getFullYear()} Global Connect</span>
+              <span>© {new Date().getFullYear()} Global ZGEY</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>Built with</span>
               <Heart className="h-4 w-4 text-coral fill-coral" />
               <span>using</span>
               <a
-                href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'global-connect')}`}
+                href={`https://caffeine.ai/?utm_source=Caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(typeof window !== 'undefined' ? window.location.hostname : 'global-zgey')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-terracotta hover:text-coral transition-colors"

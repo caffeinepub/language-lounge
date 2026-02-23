@@ -1,98 +1,62 @@
 {
   "kind": "build_request",
-  "title": "Enable text chat during voice and video calls",
-  "projectName": "Global Connect",
+  "title": "Add app logo to Global ZGEY application",
+  "projectName": "Global ZGEY",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-29",
-      "text": "Add a persistent text chat interface overlay that remains visible and accessible during active voice calls in the VoiceRoom component",
+      "id": "REQ-45",
+      "text": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing \"Global Connect\" text branding",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-latest"
         ],
         "quotes": [
-          "User can use the chat option when he is having voice calling or video calling time"
+          "add app logo"
         ]
       },
       "acceptanceCriteria": [
-        "Text chat interface is visible during voice calls",
-        "Users can send and receive messages while speaking or listening",
-        "Chat messages display in real-time without interrupting voice functionality",
-        "Chat interface does not obstruct speaker/listener sections"
+        "The app logo image is visible in the Layout header",
+        "Logo maintains proper aspect ratio and sizing for header display",
+        "Logo is loaded from the generated assets directory as a static asset",
+        "Logo displays correctly on both light and dark themes"
       ]
     },
     {
-      "id": "REQ-30",
-      "text": "Ensure the InRoomChat component remains functional and accessible when users are actively engaged in voice communication (speaking or listening)",
+      "id": "REQ-46",
+      "text": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-latest"
         ],
         "quotes": [
-          "User can use the chat option when he is having voice calling or video calling time"
+          "add app logo"
         ]
       },
       "acceptanceCriteria": [
-        "Chat input field remains active during voice sessions",
-        "Messages can be sent while microphone is active",
-        "Typing in chat does not interfere with voice transmission",
-        "Chat history scrolls independently of voice activity"
-      ]
-    },
-    {
-      "id": "REQ-31",
-      "text": "Create a video call interface component with integrated text chat overlay, allowing users to send and receive text messages during active video sessions",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-latest"
-        ],
-        "quotes": [
-          "User can use the chat option when he is having voice calling or video calling time"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Video call interface displays participant video feeds",
-        "Text chat overlay is positioned to not obscure video content",
-        "Users can toggle chat visibility during video calls",
-        "Chat messages sync with the room's message history",
-        "Video and chat functionality work simultaneously without performance degradation"
-      ]
-    },
-    {
-      "id": "REQ-32",
-      "text": "Update the VoiceRoom page to include a chat toggle button or permanent chat panel that allows users to view and interact with text messages while participating in voice conversations",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-latest"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Chat toggle button is easily accessible in the voice room UI",
-        "Chat panel can be expanded or collapsed without leaving the room",
-        "Unread message indicator shows when chat is minimized",
-        "Chat state persists when toggling between expanded and collapsed views"
+        "Favicon appears in browser tabs when the application is open",
+        "Favicon uses appropriate size (16x16 or 32x32 pixels)",
+        "Favicon is linked correctly in frontend/index.html"
       ]
     }
   ],
   "constraints": [
-    "Do not modify the InRoomChat component's core message display and translation functionality",
-    "Maintain the existing voice room layout with speaker and listener sections",
-    "Ensure chat overlay does not interfere with hand raise queue visibility",
-    "Preserve real-time message synchronization with backend"
+    "Do not modify immutable frontend paths: useInternetIdentity, useActor, main.tsx, or components/ui directory",
+    "Logo image must be loaded from frontend/public/assets/generated directory as a static asset",
+    "Do not route generated logo through the backend"
   ],
   "nonGoals": [
-    "Implementing actual video calling infrastructure (WebRTC, video streaming)",
-    "Adding voice call quality indicators or audio processing features",
-    "Creating separate video chat rooms distinct from voice rooms",
-    "Building screen sharing or video recording functionality"
+    "Animated logo variations",
+    "Multiple logo sizes for different breakpoints",
+    "Logo customization or theme-specific logo variants beyond basic display"
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Global ZGEY app logo with globe illustration, soundwave element, and connected user avatars on dark background matching the uploaded reference design (global-zgey-logo.dim_512x512.png)",
+      "Global ZGEY favicon with simplified icon version suitable for browser tab display (global-zgey-favicon.dim_32x32.png)"
+    ],
     "edits": []
   }
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useGetCallerUserProfile, useGetRoomMessages } from '../hooks/useQueries';
@@ -51,6 +51,13 @@ export default function VoiceRoom() {
 
   const isAuthenticated = !!identity;
   const unreadCount = Math.max(0, messages.length - lastReadMessageCount);
+
+  const allParticipants = useMemo(() => {
+    return [...speakers, ...listeners].map((p) => ({
+      id: p.id,
+      name: p.name,
+    }));
+  }, [speakers, listeners]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -180,7 +187,7 @@ export default function VoiceRoom() {
 
             <div className="lg:col-span-1 relative">
               {isChatExpanded ? (
-                <InRoomChat roomId={Number(roomId)} messages={messages} />
+                <InRoomChat roomId={Number(roomId)} messages={messages} participants={allParticipants} />
               ) : (
                 <div className="fixed bottom-6 right-6 z-50">
                   <Button

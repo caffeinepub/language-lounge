@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
+  "projectStateVersion": 13,
   "summary": "A global communication app with voice chat, video chat, text chat, and community building features. Includes multi-language support, live lobby with language filters and topic tags, interactive voice rooms with listener-to-speaker transitions, translation and learning tools, and user profiles with language levels and interests.",
   "architectural_notes": [
     "Real-time communication requires WebRTC or similar technology for voice/video chat",
@@ -13,6 +13,7 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Global ZGEY app logo with globe illustration, soundwave element, and connected user avatars on dark background matching the uploaded reference design (global-zgey-logo.dim_512x512.png)\n- Global ZGEY favicon with simplified icon version suitable for browser tab display (global-zgey-favicon.dim_32x32.png)",
   "existing_features": [
     {
       "id": "feature-create-a-live-lobby-discovery-page-with-language-filter-tabs-japanese-bengali-english-and-at-least-5-additional-languages-displayed-at-the-top-of-the-interface",
@@ -261,6 +262,78 @@
         "REQ-32"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-gift-picker-button-to-the-inroomchat-component-that-opens-a-modal-displaying-the-available-gift-catalog",
+      "title": "Add a gift picker button to the InRoomChat component that opens a modal displaying the available gift catalog",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-gift-selection-flow-where-users-can-choose-a-recipient-from-current-room-participants-and-select-a-gift-to-send",
+      "title": "Implement gift selection flow where users can choose a recipient from current room participants and select a gift to send",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-gift-animations-or-notifications-in-the-chat-feed-when-gifts-are-sent-showing-the-sender-recipient-and-gift-icon-with-a-celebratory-visual-effect",
+      "title": "Display gift animations or notifications in the chat feed when gifts are sent, showing the sender, recipient, and gift icon with a celebratory visual effect",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-voiceroom-page-to-integrate-gift-sending-functionality-ensuring-the-gift-picker-is-accessible-during-voice-sessions",
+      "title": "Update the VoiceRoom page to integrate gift sending functionality, ensuring the gift picker is accessible during voice sessions",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-giftpickermodal-component-to-display-gifts-in-a-4-column-grid-layout-matching-the-reference-design-showing-gift-illustrations-names-and-coin-prices-clearly-beneath-each-item-with-consistent-spacing-and-typography",
+      "title": "Update the GiftPickerModal component to display gifts in a 4-column grid layout matching the reference design, showing gift illustrations, names, and coin prices clearly beneath each item with consistent spacing and typography",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-visual-styling-to-the-gift-picker-modal-with-a-dark-background-theme-similar-to-the-reference-image-ensuring-good-contrast-for-the-colorful-gift-illustrations-and-white-text-labels",
+      "title": "Add visual styling to the gift picker modal with a dark background theme similar to the reference image, ensuring good contrast for the colorful gift illustrations and white text labels",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-generated-food-gift-illustrations-as-static-assets-in-the-gift-picker-loading-images-from-frontend-public-assets-generated-directory-with-appropriate-fallback-handling-if-images-fail-to-load",
+      "title": "Display generated food gift illustrations as static assets in the gift picker, loading images from frontend/public/assets/generated directory with appropriate fallback handling if images fail to load",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-display-the-global-zgey-app-logo-in-the-layout-header-component-replacing-or-complementing-the-existing-global-connect-text-branding",
+      "title": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing \"Global Connect\" text branding",
+      "reqIds": [
+        "REQ-45"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-global-zgey-logo-to-the-html-document-head-as-a-favicon-for-browser-tab-display",
+      "title": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
+      "reqIds": [
+        "REQ-46"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -401,6 +474,58 @@
     {
       "id": "AR-36",
       "summary": "Enable text chat during active voice or video calls",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Add gift functionality to chat rooms",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Add a Gift data type to the backend with fields for gift ID, name, icon/image filename, and price (in tokens or points)",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-39",
+      "summary": "Create backend functions to retrieve the available gift catalog for display in the UI",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-40",
+      "summary": "Add backend function to send a gift from one user to another in a specific room, recording the sender, recipient, gift ID, room ID, and timestamp",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-41",
+      "summary": "Create backend query function to retrieve gift history for a specific room, showing who sent which gifts to whom",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-42",
+      "summary": "Update the backend gift catalog to include 12 food-themed gift items matching the uploaded reference image: TurkCoffee (29 coins), Taco (29 coins), Dumplings (29 coins), Ramen Bowl (32 coins), Milk Tea (89 coins), SweetCake (89 coins), Gold Dates (89 coins), Movie corn (99 coins), and 4 additional food items in the lower price tier (29-32 coins) with appropriate names and pricing",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-43",
+      "summary": "Add app logo to the application",
       "reqIds": [],
       "status": "pending"
     }

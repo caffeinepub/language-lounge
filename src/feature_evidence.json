@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-a-persistent-text-chat-interface-overlay-that-remains-visible-and-accessible-during-active-voice-calls-in-the-voiceroom-component",
-      "featureTitle": "Add a persistent text chat interface overlay that remains visible and accessible during active voice calls in the VoiceRoom component",
+      "featureId": "feature-display-the-global-zgey-app-logo-in-the-layout-header-component-replacing-or-complementing-the-existing-global-connect-text-branding",
+      "featureTitle": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing \"Global Connect\" text branding",
       "files": [
-        "frontend/src/pages/VoiceRoom.tsx"
+        "frontend/src/components/Layout.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -18,15 +18,15 @@
         "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-29"
+        "REQ-45"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-ensure-the-inroomchat-component-remains-functional-and-accessible-when-users-are-actively-engaged-in-voice-communication-speaking-or-listening",
-      "featureTitle": "Ensure the InRoomChat component remains functional and accessible when users are actively engaged in voice communication (speaking or listening)",
+      "featureId": "feature-add-the-global-zgey-logo-to-the-html-document-head-as-a-favicon-for-browser-tab-display",
+      "featureTitle": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
       "files": [
-        "frontend/src/components/InRoomChat.tsx"
+        "frontend/index.html"
       ],
       "components": [
         "authorization@4.0.0",
@@ -39,50 +39,7 @@
         "blob-storage@4.0.0"
       ],
       "testIds": [
-        "REQ-30"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-create-a-video-call-interface-component-with-integrated-text-chat-overlay-allowing-users-to-send-and-receive-text-messages-during-active-video-sessions",
-      "featureTitle": "Create a video call interface component with integrated text chat overlay, allowing users to send and receive text messages during active video sessions",
-      "files": [
-        "frontend/src/components/VideoCallInterface.tsx",
-        "frontend/src/pages/VoiceRoom.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "http-outcalls@3.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
-      ],
-      "testIds": [
-        "REQ-31"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-voiceroom-page-to-include-a-chat-toggle-button-or-permanent-chat-panel-that-allows-users-to-view-and-interact-with-text-messages-while-participating-in-voice-conversations",
-      "featureTitle": "Update the VoiceRoom page to include a chat toggle button or permanent chat panel that allows users to view and interact with text messages while participating in voice conversations",
-      "files": [
-        "frontend/src/pages/VoiceRoom.tsx"
-      ],
-      "components": [
-        "authorization@4.0.0",
-        "http-outcalls@3.0.0",
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "blob-storage@4.0.0"
-      ],
-      "testIds": [
-        "REQ-32"
+        "REQ-46"
       ],
       "confidence": "high"
     }

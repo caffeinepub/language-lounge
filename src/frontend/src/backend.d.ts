@@ -24,6 +24,19 @@ export interface ProficiencyLevel {
     level: string;
     language: string;
 }
+export interface GiftTransaction {
+    recipient: Principal;
+    sender: Principal;
+    timestamp: Time;
+    roomId: bigint;
+    giftId: bigint;
+}
+export interface Gift {
+    id: bigint;
+    icon: ExternalBlob;
+    name: string;
+    price: bigint;
+}
 export interface http_header {
     value: string;
     name: string;
@@ -76,11 +89,14 @@ export interface backendInterface {
     deleteRoom(roomId: bigint): Promise<void>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
+    getGiftCatalog(): Promise<Array<Gift>>;
+    getRoomGiftHistory(roomId: bigint): Promise<Array<GiftTransaction>>;
     getRoomMessages(roomId: bigint): Promise<Array<Message>>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isBlocked(target: Principal): Promise<boolean>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
+    sendGift(roomId: bigint, recipient: Principal, giftId: bigint): Promise<void>;
     sendMessage(roomId: bigint, content: string): Promise<void>;
     transform(input: TransformationInput): Promise<TransformationOutput>;
     translateText(text: string, sourceLang: string, targetLang: string): Promise<string>;

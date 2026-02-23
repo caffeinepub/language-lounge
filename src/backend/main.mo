@@ -1,5 +1,4 @@
 import MixinStorage "blob-storage/Mixin";
-
 import Storage "blob-storage/Storage";
 import Map "mo:core/Map";
 import Nat "mo:core/Nat";
@@ -9,10 +8,10 @@ import List "mo:core/List";
 import Time "mo:core/Time";
 import Text "mo:core/Text";
 import Array "mo:core/Array";
-import Int "mo:core/Int";
 import OutCall "http-outcalls/outcall";
 import AccessControl "authorization/access-control";
 import MixinAuthorization "authorization/MixinAuthorization";
+
 
 
 actor {
@@ -59,14 +58,32 @@ actor {
     messages : List.List<Message>;
   };
 
+  public type Gift = {
+    id : Nat;
+    name : Text;
+    icon : Storage.ExternalBlob;
+    price : Nat;
+  };
+
+  public type GiftTransaction = {
+    sender : Principal;
+    recipient : Principal;
+    giftId : Nat;
+    roomId : Nat;
+    timestamp : Time.Time;
+  };
+
   let accessControlState = AccessControl.initState();
   include MixinAuthorization(accessControlState);
 
   let rooms = Map.empty<Nat, Room>();
+  let gifts = Map.empty<Nat, Gift>();
+  let giftTransactions = List.empty<GiftTransaction>();
   let userProfiles = Map.empty<Principal, UserProfile>();
   var nextRoomId = 0;
   let blockedUsers = Map.empty<Principal, List.List<Principal>>();
 
+  // Room functionality
   public shared ({ caller }) func createRoom(name : Text, roomType : RoomType) : async Nat {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can create rooms");
@@ -134,6 +151,7 @@ actor {
     room.messages.add(message);
   };
 
+  // User profile functionality
   public shared ({ caller }) func saveCallerUserProfile(profile : UserProfile) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can save profiles");
@@ -155,7 +173,12 @@ actor {
     userProfiles.get(user);
   };
 
+  // Messaging
   public query ({ caller }) func getRoomMessages(roomId : Nat) : async [Message] {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view messages");
+    };
+
     let room = switch (rooms.get(roomId)) {
       case (null) { Runtime.trap("Room does not exist") };
       case (?room) { room };
@@ -175,11 +198,16 @@ actor {
     };
   };
 
+  // Translation API
   public query func transform(input : OutCall.TransformationInput) : async OutCall.TransformationOutput {
     OutCall.transform(input);
   };
 
-  public shared ({ caller }) func translateText(text : Text, sourceLang : Text, targetLang : Text) : async Text {
+  public shared ({ caller }) func translateText(
+    text : Text,
+    sourceLang : Text,
+    targetLang : Text,
+  ) : async Text {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can translate text");
     };
@@ -187,6 +215,7 @@ actor {
     await OutCall.httpGetRequest(url, [], transform);
   };
 
+  // Blocking users
   public shared ({ caller }) func blockUser(target : Principal) : async () {
     if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
       Runtime.trap("Unauthorized: Only users can block others");
@@ -210,5 +239,78 @@ actor {
       case (?blocks) { blocks };
     };
     currentBlocks.any(func(user) { user == target });
+  };
+
+  public query ({ caller }) func getGiftCatalog() : async [Gift] {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view gift catalog");
+    };
+    gifts.values().toArray();
+  };
+
+  public shared ({ caller }) func sendGift(
+    roomId : Nat,
+    recipient : Principal,
+    giftId : Nat,
+  ) : async () {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can send gifts");
+    };
+
+    let room = switch (rooms.get(roomId)) {
+      case (null) { Runtime.trap("Room does not exist") };
+      case (?room) { room };
+    };
+
+    switch (room.roomType) {
+      case (#privateRoom) {
+        let callerText = caller.toText();
+        if (not room.allowedUsers.any<Text>(func(user) { user == callerText })) {
+          Runtime.trap("Unauthorized: You are not allowed to send gifts in this private room");
+        };
+      };
+      case (#publicRoom) {};
+    };
+
+    switch (gifts.get(giftId)) {
+      case (null) { Runtime.trap("Gift does not exist") };
+      case (?_) {};
+    };
+
+    let transaction : GiftTransaction = {
+      sender = caller;
+      recipient;
+      giftId;
+      roomId;
+      timestamp = Time.now();
+    };
+
+    giftTransactions.add(transaction);
+  };
+
+  public query ({ caller }) func getRoomGiftHistory(roomId : Nat) : async [GiftTransaction] {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can view gift history");
+    };
+
+    let room = switch (rooms.get(roomId)) {
+      case (null) { Runtime.trap("Room does not exist") };
+      case (?room) { room };
+    };
+
+    switch (room.roomType) {
+      case (#privateRoom) {
+        let callerText = caller.toText();
+        if (not room.allowedUsers.any<Text>(func(user) { user == callerText })) {
+          Runtime.trap("Unauthorized: You are not allowed to view gift history in this private room");
+        };
+      };
+      case (#publicRoom) {};
+    };
+
+    giftTransactions
+      .toArray()
+      .filter(func(t) { t.roomId == roomId })
+      .reverse();
   };
 };

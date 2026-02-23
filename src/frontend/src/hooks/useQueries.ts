@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import type { UserProfile, Message, RoomType } from '../backend';
+import type { UserProfile, Message, RoomType, Gift, GiftTransaction } from '../backend';
 import { Principal } from '@dfinity/principal';
 import { toast } from 'sonner';
 
@@ -181,5 +181,51 @@ export function useTranslateText() {
     onError: (error: Error) => {
       toast.error(`Translation failed: ${error.message}`);
     },
+  });
+}
+
+export function useGetGiftCatalog() {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<Gift[]>({
+    queryKey: ['giftCatalog'],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getGiftCatalog();
+    },
+    enabled: !!actor && !actorFetching,
+  });
+}
+
+export function useSendGift() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ roomId, recipient, giftId }: { roomId: number; recipient: Principal; giftId: number }) => {
+      if (!actor) throw new Error('Actor not available');
+      await actor.sendGift(BigInt(roomId), recipient, BigInt(giftId));
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['roomGiftHistory', variables.roomId] });
+      toast.success('Gift sent successfully! 🎁');
+    },
+    onError: (error: Error) => {
+      toast.error(`Failed to send gift: ${error.message}`);
+    },
+  });
+}
+
+export function useGetRoomGiftHistory(roomId: number) {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<GiftTransaction[]>({
+    queryKey: ['roomGiftHistory', roomId],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getRoomGiftHistory(BigInt(roomId));
+    },
+    enabled: !!actor && !actorFetching && roomId !== undefined,
+    refetchInterval: 3000,
   });
 }

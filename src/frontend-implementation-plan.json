@@ -1,84 +1,38 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Enable text chat during voice and video calls",
+  "title": "Add app logo to Global ZGEY application",
   "requirements": [
     {
-      "id": "REQ-29",
-      "summary": "Add persistent text chat interface overlay during voice calls in VoiceRoom",
+      "id": "REQ-45",
+      "summary": "Display the Global ZGEY app logo in the Layout header component, replacing or complementing the existing branding",
       "acceptanceCriteria": [
-        "Text chat interface is visible during voice calls",
-        "Users can send and receive messages while speaking or listening",
-        "Chat messages display in real-time without interrupting voice functionality",
-        "Chat interface does not obstruct speaker/listener sections"
+        "The app logo image is visible in the Layout header",
+        "Logo maintains proper aspect ratio and sizing for header display",
+        "Logo is loaded from the generated assets directory as a static asset",
+        "Logo displays correctly on both light and dark themes"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/VoiceRoom.tsx",
+          "path": "frontend/src/components/Layout.tsx",
           "operation": "modify",
-          "description": "Integrate InRoomChat component as a persistent overlay that remains visible alongside speaker and listener sections. Position the chat panel to not obstruct the speaker grid, listener grid, or hand raise queue. Ensure the chat overlay maintains real-time message functionality while voice activities are ongoing. The chat should be placed in a fixed or sticky position within the VoiceRoom layout without interfering with existing voice room controls or participant sections."
+          "description": "Import and display the Global ZGEY app logo (frontend/public/assets/generated/global-zgey-logo.dim_512x512.png) in the header component. Replace or complement the existing 'Global Connect' text branding with the logo image. Ensure the logo has appropriate sizing (height and width constraints) and maintains aspect ratio. Apply CSS classes that ensure the logo displays correctly in both light and dark themes. Position the logo in the header's branding area, typically on the left side before the navigation links."
         }
       ]
     },
     {
-      "id": "REQ-30",
-      "summary": "Ensure InRoomChat remains functional during active voice communication",
+      "id": "REQ-46",
+      "summary": "Add the Global ZGEY logo to the HTML document head as a favicon for browser tab display",
       "acceptanceCriteria": [
-        "Chat input field remains active during voice sessions",
-        "Messages can be sent while microphone is active",
-        "Typing in chat does not interfere with voice transmission",
-        "Chat history scrolls independently of voice activity"
+        "Favicon appears in browser tabs when the application is open",
+        "Favicon uses appropriate size (16x16 or 32x32 pixels)",
+        "Favicon is linked correctly in frontend/index.html"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/InRoomChat.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Verify that the chat input field and message sending functionality remain fully operational during active voice sessions. Ensure the scrolling behavior works independently and that typing in the chat does not trigger any side effects that could affect voice transmission. Add explicit focus management to prevent keyboard events from interfering with voice controls. Test that the auto-scrolling on new messages continues to work while users are speaking or listening."
-        }
-      ]
-    },
-    {
-      "id": "REQ-31",
-      "summary": "Create video call interface component with integrated text chat overlay",
-      "acceptanceCriteria": [
-        "Video call interface displays participant video feeds",
-        "Text chat overlay is positioned to not obscure video content",
-        "Users can toggle chat visibility during video calls",
-        "Chat messages sync with the room's message history",
-        "Video and chat functionality work simultaneously without performance degradation"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/VideoCallInterface.tsx",
-          "operation": "create",
-          "description": "Create a new video call interface component that displays participant video feeds in a grid layout with an integrated text chat overlay. The component should accept roomId as a prop and render video placeholders (mock video elements or divs styled as video feeds) for participants. Integrate the InRoomChat component as a toggleable sidebar or overlay positioned to not obscure the video content. Include a toggle button to show/hide the chat panel. Ensure the chat messages sync with the room's message history by passing the roomId to InRoomChat. Design the layout to handle multiple video feeds efficiently without performance issues. Use responsive grid layouts (CSS Grid or Flexbox) to arrange video feeds and position the chat overlay appropriately."
-        },
-        {
-          "path": "frontend/src/pages/VoiceRoom.tsx",
-          "operation": "modify",
-          "description": "Add conditional rendering logic to display the VideoCallInterface component when a video call mode is active. Introduce a state variable (e.g., isVideoMode) that toggles between voice-only and video call modes. Provide a UI control (button or toggle) in the VoiceRoom page that allows users to switch to video mode. When video mode is enabled, render the VideoCallInterface component instead of or alongside the existing speaker/listener sections. Ensure the hand raise queue and room settings remain accessible in video mode. Wire the VideoCallInterface into the VoiceRoom layout so it can be navigated to or toggled on by users."
-        }
-      ]
-    },
-    {
-      "id": "REQ-32",
-      "summary": "Add chat toggle button or permanent panel in VoiceRoom for text interaction during voice calls",
-      "acceptanceCriteria": [
-        "Chat toggle button is easily accessible in the voice room UI",
-        "Chat panel can be expanded or collapsed without leaving the room",
-        "Unread message indicator shows when chat is minimized",
-        "Chat state persists when toggling between expanded and collapsed views"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/VoiceRoom.tsx",
-          "operation": "modify",
-          "description": "Add a chat toggle button to the VoiceRoom UI, positioned in a prominent location (e.g., top-right corner or side toolbar). Introduce a state variable (isChatExpanded) to track whether the chat panel is expanded or collapsed. When the chat is collapsed, display an unread message count badge on the toggle button if there are new messages since the chat was minimized. Implement the toggle functionality so clicking the button expands or collapses the InRoomChat component. Ensure the chat state (expanded/collapsed) persists during the user's session in the room. Use conditional rendering or CSS classes to show/hide the chat panel based on the toggle state. The chat should remain accessible and functional when expanded, and the toggle button should always be visible for easy access."
-        },
-        {
-          "path": "frontend/src/hooks/useQueries.ts",
-          "operation": "modify",
-          "description": "Add a derived query or state management logic to track unread message counts for the current room. This can be done by comparing the latest message timestamp with the last time the user had the chat panel expanded. Expose a hook or function (e.g., useUnreadCount) that returns the number of unread messages for a given roomId. This unread count will be used by the VoiceRoom page to display a badge on the chat toggle button when the chat is minimized."
+          "description": "Add a <link> element in the <head> section to reference the Global ZGEY favicon (frontend/public/assets/generated/global-zgey-favicon.dim_32x32.png) as the page favicon. Use rel='icon' with type='image/png' and the correct href path to the generated favicon asset. Ensure the href path is relative to the frontend public directory (e.g., '/assets/generated/global-zgey-favicon.dim_32x32.png')."
         }
       ]
     }

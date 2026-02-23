@@ -51,7 +51,20 @@ export const UserProfile = IDL.Record({
   'primaryLanguage' : IDL.Text,
   'relationshipStatus' : IDL.Text,
 });
+export const Gift = IDL.Record({
+  'id' : IDL.Nat,
+  'icon' : ExternalBlob,
+  'name' : IDL.Text,
+  'price' : IDL.Nat,
+});
 export const Time = IDL.Int;
+export const GiftTransaction = IDL.Record({
+  'recipient' : IDL.Principal,
+  'sender' : IDL.Principal,
+  'timestamp' : Time,
+  'roomId' : IDL.Nat,
+  'giftId' : IDL.Nat,
+});
 export const Message = IDL.Record({
   'content' : IDL.Text,
   'sender' : IDL.Principal,
@@ -110,6 +123,12 @@ export const idlService = IDL.Service({
   'deleteRoom' : IDL.Func([IDL.Nat], [], []),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getGiftCatalog' : IDL.Func([], [IDL.Vec(Gift)], ['query']),
+  'getRoomGiftHistory' : IDL.Func(
+      [IDL.Nat],
+      [IDL.Vec(GiftTransaction)],
+      ['query'],
+    ),
   'getRoomMessages' : IDL.Func([IDL.Nat], [IDL.Vec(Message)], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
@@ -119,6 +138,7 @@ export const idlService = IDL.Service({
   'isBlocked' : IDL.Func([IDL.Principal], [IDL.Bool], ['query']),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'sendGift' : IDL.Func([IDL.Nat, IDL.Principal, IDL.Nat], [], []),
   'sendMessage' : IDL.Func([IDL.Nat, IDL.Text], [], []),
   'transform' : IDL.Func(
       [TransformationInput],
@@ -174,7 +194,20 @@ export const idlFactory = ({ IDL }) => {
     'primaryLanguage' : IDL.Text,
     'relationshipStatus' : IDL.Text,
   });
+  const Gift = IDL.Record({
+    'id' : IDL.Nat,
+    'icon' : ExternalBlob,
+    'name' : IDL.Text,
+    'price' : IDL.Nat,
+  });
   const Time = IDL.Int;
+  const GiftTransaction = IDL.Record({
+    'recipient' : IDL.Principal,
+    'sender' : IDL.Principal,
+    'timestamp' : Time,
+    'roomId' : IDL.Nat,
+    'giftId' : IDL.Nat,
+  });
   const Message = IDL.Record({
     'content' : IDL.Text,
     'sender' : IDL.Principal,
@@ -230,6 +263,12 @@ export const idlFactory = ({ IDL }) => {
     'deleteRoom' : IDL.Func([IDL.Nat], [], []),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getGiftCatalog' : IDL.Func([], [IDL.Vec(Gift)], ['query']),
+    'getRoomGiftHistory' : IDL.Func(
+        [IDL.Nat],
+        [IDL.Vec(GiftTransaction)],
+        ['query'],
+      ),
     'getRoomMessages' : IDL.Func([IDL.Nat], [IDL.Vec(Message)], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
@@ -239,6 +278,7 @@ export const idlFactory = ({ IDL }) => {
     'isBlocked' : IDL.Func([IDL.Principal], [IDL.Bool], ['query']),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'sendGift' : IDL.Func([IDL.Nat, IDL.Principal, IDL.Nat], [], []),
     'sendMessage' : IDL.Func([IDL.Nat, IDL.Text], [], []),
     'transform' : IDL.Func(
         [TransformationInput],

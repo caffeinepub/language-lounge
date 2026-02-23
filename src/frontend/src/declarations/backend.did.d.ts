@@ -11,6 +11,19 @@ import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
 export type ExternalBlob = Uint8Array;
+export interface Gift {
+  'id' : bigint,
+  'icon' : ExternalBlob,
+  'name' : string,
+  'price' : bigint,
+}
+export interface GiftTransaction {
+  'recipient' : Principal,
+  'sender' : Principal,
+  'timestamp' : Time,
+  'roomId' : bigint,
+  'giftId' : bigint,
+}
 export interface Message {
   'content' : string,
   'sender' : Principal,
@@ -90,11 +103,14 @@ export interface _SERVICE {
   'deleteRoom' : ActorMethod<[bigint], undefined>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getGiftCatalog' : ActorMethod<[], Array<Gift>>,
+  'getRoomGiftHistory' : ActorMethod<[bigint], Array<GiftTransaction>>,
   'getRoomMessages' : ActorMethod<[bigint], Array<Message>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isBlocked' : ActorMethod<[Principal], boolean>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'sendGift' : ActorMethod<[bigint, Principal, bigint], undefined>,
   'sendMessage' : ActorMethod<[bigint, string], undefined>,
   'transform' : ActorMethod<[TransformationInput], TransformationOutput>,
   'translateText' : ActorMethod<[string, string, string], string>,

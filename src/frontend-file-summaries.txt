@@ -1,9 +1,9 @@
 {
   "frontend/src/App.tsx": "Main application component with TanStack Router setup, authentication flow, profile setup redirect logic, and theme provider integration.",
-  "frontend/src/hooks/useQueries.ts": "Custom React Query hooks for all backend operations including user profiles, room messages, room management, blocking users, and translation with optimistic updates and error handling.",
-  "frontend/src/components/Layout.tsx": "Application layout wrapper with header navigation, user authentication controls, avatar dropdown menu displaying profile picture when available, and footer with caffeine.ai attribution.",
+  "frontend/src/hooks/useQueries.ts": "Custom React Query hooks for all backend operations including user profiles, room messages, room management, blocking users, translation, gift catalog fetching, gift sending, and room gift history with optimistic updates and error handling.",
+  "frontend/src/components/Layout.tsx": "Application layout wrapper with header navigation displaying the Global ZGEY logo and branding, user authentication controls, avatar dropdown menu, and footer with caffeine.ai attribution.",
   "frontend/src/pages/LiveLobby.tsx": "Live lobby discovery page with language filter tabs, topic filtering, room cards sorted by activity, room suggestions for authenticated users, and create room functionality.",
-  "frontend/src/pages/VoiceRoom.tsx": "Interactive voice room page with speaker/listener sections, hand raise queue, toggleable in-room chat with unread badge, video mode toggle, and room settings with pulsing avatar indicators for active speakers.",
+  "frontend/src/pages/VoiceRoom.tsx": "Interactive voice room page with speaker/listener sections, hand raise queue, toggleable in-room chat with gift functionality, video mode toggle, room settings, and participant list passed to chat for gift recipient selection.",
   "frontend/src/pages/ProfileSetup.tsx": "Comprehensive profile setup form with sections for basic info (name, age, gender, profile picture upload), about (self-introduction, hobbies), personal details (location, education, occupation, relationship status), interests (likes, dislikes, language proficiency, interest tags), and travel destinations with character limits and validation.",
   "frontend/src/pages/UserProfile.tsx": "User profile display page organized into sections showing profile picture, about, personal information (age, gender, relationship status, location, education, occupation), language proficiency, interests & preferences (hobbies, likes, dislikes, interest tags), and travel destinations with conditional rendering for optional fields.",
   "frontend/src/pages/MessagesPage.tsx": "Messages hub page displaying conversation list with search functionality and new conversation creation modal.",
@@ -14,7 +14,7 @@
   "frontend/src/components/SpeakerSection.tsx": "Speaker section component showing active speakers in grid layout with pulsing avatars and language level badges.",
   "frontend/src/components/ListenerSection.tsx": "Listener section component displaying listeners in compact grid with raise hand button for non-host users.",
   "frontend/src/components/PulsingAvatar.tsx": "Avatar component with animated glowing ring effect for active speakers and microphone status indicator.",
-  "frontend/src/components/InRoomChat.tsx": "In-room chat component with scrollable message history, real-time message sending, auto-scroll functionality, and explicit focus management to prevent keyboard events from interfering with voice controls during active sessions.",
+  "frontend/src/components/InRoomChat.tsx": "In-room chat component with scrollable message history, gift button to open gift picker modal, combined timeline of regular messages and gift transactions sorted chronologically, real-time message sending, and auto-scroll functionality.",
   "frontend/src/components/ChatMessage.tsx": "Individual chat message component with avatar, timestamp, and optional word-by-word translation capability.",
   "frontend/src/components/TranslatableWord.tsx": "Clickable word component with popover translation display using user's primary language from profile.",
   "frontend/src/components/HandRaiseQueue.tsx": "Host-only component displaying pending hand raise requests with approve/deny actions in queue order.",
@@ -30,5 +30,8 @@
   "frontend/src/components/NewConversationModal.tsx": "Modal for creating new direct messages or group chats with private room creation.",
   "frontend/src/index.css": "Global styles with warm earth tones OKLCH color system (terracotta, coral, sage, peach, beige), custom utilities, and pulsing ring animation for active speakers.",
   "frontend/tailwind.config.js": "Tailwind configuration with extended warm color palette, custom border radius values, Inter font family, and soft shadow utilities.",
-  "frontend/src/components/VideoCallInterface.tsx": "Video call interface component displaying participant video feeds in a responsive grid layout with integrated toggleable text chat overlay, video/audio controls, and language level badges for each participant."
+  "frontend/src/components/VideoCallInterface.tsx": "Video call interface component displaying participant video feeds in a responsive grid layout with integrated toggleable text chat overlay, video/audio controls, and language level badges for each participant.",
+  "frontend/src/components/GiftPickerModal.tsx": "Multi-step modal component for sending gifts with recipient selection, 4-column grid gift catalog display with dark background theme, colorful gift illustrations, white text labels, coin prices, and confirmation step with image fallback handling.",
+  "frontend/src/components/GiftMessage.tsx": "Specialized chat message component for gift transactions displaying sender name, recipient name, gift icon with bounce animation and fallback handling, and timestamp in a visually distinct card with warm gradient background.",
+  "frontend/index.html": "HTML entry point with Global ZGEY favicon, page title, and root div for React application mounting."
 }
